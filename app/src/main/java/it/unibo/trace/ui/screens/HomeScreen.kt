@@ -22,7 +22,7 @@ fun HomeScreen(
     onAddClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {}
 ) {
-    val title = "TRACE";
+    val title = "TRACE"
 
     Scaffold(
         topBar = {

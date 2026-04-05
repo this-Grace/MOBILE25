@@ -1,4 +1,4 @@
-package com.example.myapplication
+package it.unibo.trace
 
 import org.junit.Test
 

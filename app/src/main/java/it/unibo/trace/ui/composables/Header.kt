@@ -22,7 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Header(onIconClick: () -> Unit = { }) {
+fun Header(
+    title: String,
+    onIconClick: () -> Unit = { }
+) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -38,7 +41,7 @@ fun Header(onIconClick: () -> Unit = { }) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "TRACE",
+                text = title,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = MaterialTheme.colorScheme.onBackground,
@@ -49,7 +52,7 @@ fun Header(onIconClick: () -> Unit = { }) {
                 Icon(
                     imageVector = Icons.Default.Settings,
                     contentDescription = "Settings",
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.size(24.dp)
                 )
             }

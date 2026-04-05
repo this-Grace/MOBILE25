@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import it.unibo.trace.ui.composables.Footer
-import it.unibo.trace.ui.composables.Header
+import it.unibo.trace.ui.screens.HomeScreen
 import it.unibo.trace.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,7 +13,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                Footer()
+                HomeScreen(
+                    onAddClick = { /* Handle FAB click */ },
+                    onSettingsClick = { /* Handle Settings click */ }
+                )
             }
         }
     }

@@ -14,7 +14,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Footer() {
+fun Footer(
+    title: String
+) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -28,7 +30,7 @@ fun Footer() {
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "© 2026 TRACE",
+                text = "© 2026 $title",
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
             )

@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import it.unibo.trace.ui.composables.Header
+import it.unibo.trace.ui.composables.NavigationBar
 import it.unibo.trace.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +14,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                Header {  }
+                NavigationBar()
             }
         }
     }

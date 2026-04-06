@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.*
 import it.unibo.trace.ui.screens.HomeScreen
+import it.unibo.trace.ui.screens.LoginScreen
 import it.unibo.trace.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,10 +15,19 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                HomeScreen(
-                    onAddClick = { /* Handle FAB click */ },
-                    onSettingsClick = { /* Handle Settings click */ }
-                )
+                // Semplice gestione della navigazione tramite stato
+                var isLoggedIn by remember { mutableStateOf(false) }
+
+                if (!isLoggedIn) {
+                    LoginScreen(onLoginClick = { username, password ->
+                        // Logica di autenticazione (esempio)
+                        if (username.isNotEmpty() && password.isNotEmpty()) {
+                            isLoggedIn = true
+                        }
+                    })
+                } else {
+                    HomeScreen()
+                }
             }
         }
     }

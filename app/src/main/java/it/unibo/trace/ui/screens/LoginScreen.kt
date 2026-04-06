@@ -32,21 +32,14 @@ fun LoginScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Benvenuto",
+                text = "Welcome Back",
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )
-            
-            Text(
-                text = "Accedi per continuare",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Campo Username
             OutlinedTextField(
                 value = username,
                 onValueChange = { username = it },
@@ -57,7 +50,6 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Campo Password
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -66,17 +58,10 @@ fun LoginScreen(
                 singleLine = true,
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                trailingIcon = {
-                    // val image = if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
-//                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
-//                        Icon(imageVector = image, contentDescription = "Toggle password visibility")
-//                    }
-                }
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Pulsante Login
             Button(
                 onClick = { onLoginClick(username, password) },
                 modifier = Modifier

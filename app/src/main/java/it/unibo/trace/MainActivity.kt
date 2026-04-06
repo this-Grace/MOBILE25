@@ -15,12 +15,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                // Semplice gestione della navigazione tramite stato
                 var isLoggedIn by remember { mutableStateOf(false) }
 
                 if (!isLoggedIn) {
                     LoginScreen(onLoginClick = { username, password ->
-                        // Logica di autenticazione (esempio)
                         if (username.isNotEmpty() && password.isNotEmpty()) {
                             isLoggedIn = true
                         }

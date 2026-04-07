@@ -31,7 +31,7 @@ fun HomeScreen(
             Header(title, onIconClick = onSettingsClick)
         },
         bottomBar = {
-            Footer(title)
+            Footer()
         },
         floatingActionButton = {
             FloatingButton(

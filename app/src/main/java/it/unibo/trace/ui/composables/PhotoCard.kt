@@ -34,11 +34,11 @@ fun PhotoCard(
         shape = RoundedCornerShape(12.dp),
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight()
     ) {
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(aspectRatio)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(aspectRatio)
         ) {
             Image(
                 painter = photoPainter,
@@ -53,9 +53,9 @@ fun PhotoCard(
                     .background(
                         Brush.verticalGradient(
                             colors = listOf(
-                                Color.Black.copy(alpha = 0.1f),
-                                Color.Black.copy(alpha = 0.5f)
-                            )
+                                Color.Transparent,
+                                Color.Black.copy(alpha = 0.6f)
+                            ),
                         )
                     )
             )
@@ -80,7 +80,7 @@ fun PhotoCard(
                         .padding(4.dp)
                 ) {
                     Icon(
-                        imageVector = if (isLiked) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        imageVector = if (isLiked) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                         contentDescription = "Like",
                         tint = if (isLiked) Color.Red else Color.White,
                         modifier = Modifier.size(24.dp)

@@ -5,8 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.*
+import it.unibo.trace.ui.screens.GroupPhotoViewScreen
 import it.unibo.trace.ui.screens.HomeScreen
 import it.unibo.trace.ui.screens.LoginScreen
+import it.unibo.trace.ui.screens.ProfileScreen
 import it.unibo.trace.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,17 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                var isLoggedIn by remember { mutableStateOf(false) }
-
-                if (!isLoggedIn) {
-                    LoginScreen(onLoginClick = { username, password ->
-                        if (username.isNotEmpty() && password.isNotEmpty()) {
-                            isLoggedIn = true
-                        }
-                    })
-                } else {
-                    HomeScreen()
-                }
+                GroupPhotoViewScreen {  }
             }
         }
     }

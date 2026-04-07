@@ -61,7 +61,6 @@ fun GroupPhotoViewScreen(
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
-
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(2),
             modifier = Modifier
@@ -69,7 +68,7 @@ fun GroupPhotoViewScreen(
                 .padding(horizontal = 12.dp),
             contentPadding = PaddingValues(
                 top = innerPadding.calculateTopPadding() + 8.dp,
-                bottom = innerPadding.calculateBottomPadding() + 80.dp
+                bottom = innerPadding.calculateBottomPadding() + 8.dp
             ),
             verticalItemSpacing = 12.dp,
             horizontalArrangement = Arrangement.spacedBy(12.dp)

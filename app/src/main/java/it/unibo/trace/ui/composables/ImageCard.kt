@@ -34,7 +34,7 @@ fun ImageCard(
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
                 painter = imagePainter,
-                contentDescription = null,
+                contentDescription = description,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )

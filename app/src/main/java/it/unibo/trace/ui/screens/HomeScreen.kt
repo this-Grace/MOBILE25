@@ -46,7 +46,7 @@ fun HomeScreen(
                 .padding(horizontal = 16.dp)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             repeat(5) { index ->
                 ImageCard(

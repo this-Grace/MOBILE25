@@ -180,7 +180,7 @@ fun ProfileScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    repeat(3) { index ->
+                    repeat(6) { index ->
                         PhotoCard(
                             photoPainter = painterResource(id = R.drawable.ic_launcher_foreground),
                             isLiked = true,

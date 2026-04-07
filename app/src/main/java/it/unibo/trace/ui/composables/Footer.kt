@@ -10,13 +10,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import it.unibo.trace.R
 
 @Composable
 fun Footer(
-    title: String
 ) {
+    val title = stringResource(id = R.string.app_name)
     Surface(
         modifier = Modifier
             .fillMaxWidth()

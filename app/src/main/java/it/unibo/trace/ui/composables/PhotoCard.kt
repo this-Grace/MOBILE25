@@ -25,6 +25,7 @@ fun PhotoCard(
     authorName: String? = null,
     isLiked: Boolean = false,
     showLikeIcon: Boolean = true,
+    aspectRatio: Float = 1f,
     onLikeClick: () -> Unit = {},
     onClick: () -> Unit = {}
 ) {
@@ -32,8 +33,13 @@ fun PhotoCard(
         onClick = onClick,
         shape = RoundedCornerShape(12.dp),
         modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
     ) {
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(aspectRatio)
+        ) {
             Image(
                 painter = photoPainter,
                 contentDescription = null,

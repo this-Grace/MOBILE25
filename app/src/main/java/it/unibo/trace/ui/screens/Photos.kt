@@ -1,6 +1,10 @@
 package it.unibo.trace.ui.screens
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
@@ -9,15 +13,18 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import it.unibo.trace.R
 import it.unibo.trace.ui.composables.FloatingButton
 import it.unibo.trace.ui.composables.Header
+import it.unibo.trace.ui.composables.ImageCard
 import it.unibo.trace.ui.composables.NavigationBar
-import it.unibo.trace.ui.composables.PhotoCard
 
 data class PhotoMock(
     val id: Int,
@@ -28,21 +35,33 @@ data class PhotoMock(
 )
 
 @Composable
-fun GroupPhotoViewScreen(
+fun PhotoScreen(
     onFloatingClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {}
 ) {
-    val title = "Weekend a Tokyo"
+    val title = " A Weekend in Tokyo"
 
-    val mockPhotos = remember {
-        listOf(
-            PhotoMock(1, "IO", false, 1.5f, R.drawable.ic_launcher_foreground),
-            PhotoMock(2, "IO", true, 1.0f, R.drawable.ic_launcher_foreground),
-            PhotoMock(3, "GIULIA", false, 1.0f, R.drawable.ic_launcher_foreground),
-            PhotoMock(4, "LUCA", false, 0.7f, R.drawable.ic_launcher_foreground),
-            PhotoMock(5, "LUCA", false, 1.5f, R.drawable.ic_launcher_foreground),
-            PhotoMock(6, "TU", true, 0.7f, R.drawable.ic_launcher_foreground),
+    var photos by remember {
+        mutableStateOf(
+            listOf(
+                PhotoMock(1, "IO", false, 1.5f, R.drawable.ic_launcher_foreground),
+                PhotoMock(2, "IO", true, 1.0f, R.drawable.ic_launcher_foreground),
+                PhotoMock(3, "GIULIA", false, 1.0f, R.drawable.ic_launcher_foreground),
+                PhotoMock(4, "LUCA", false, 0.7f, R.drawable.ic_launcher_foreground),
+                PhotoMock(5, "LUCA", false, 1.5f, R.drawable.ic_launcher_foreground),
+                PhotoMock(6, "TU", true, 0.7f, R.drawable.ic_launcher_foreground),
+            )
         )
+    }
+
+    fun onLikeClick(photoId: Int) {
+        photos = photos.map { photo ->
+            if (photo.id == photoId) {
+                photo.copy(isLiked = !photo.isLiked)
+            } else {
+                photo
+            }
+        }
     }
 
     Scaffold(
@@ -74,16 +93,18 @@ fun GroupPhotoViewScreen(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(
-                items = mockPhotos,
+                items = photos,
                 key = { it.id }
             ) { photo ->
-                PhotoCard(
-                    photoPainter = painterResource(id = photo.imageRes),
+                ImageCard(
+                    imagePainter = painterResource(id = photo.imageRes),
+                    modifier = Modifier.aspectRatio(photo.aspectRatio),
                     authorName = photo.authorName,
                     isLiked = photo.isLiked,
-                    aspectRatio = photo.aspectRatio,
-                    onLikeClick = { },
-                    onClick = { }
+                    showLikeIcon = true,
+                    showOverlay = true,
+                    onLikeClick = { onLikeClick(photo.id) },
+                    onClick = { /* TODO: more big photo */ }
                 )
             }
         }

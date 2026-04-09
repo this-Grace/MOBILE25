@@ -5,7 +5,6 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,14 +12,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,6 +31,7 @@ import it.unibo.trace.R
 import it.unibo.trace.ui.composables.Header
 import it.unibo.trace.ui.composables.ImageCard
 import it.unibo.trace.ui.composables.InfoCard
+import it.unibo.trace.ui.composables.Section
 
 @Composable
 fun ProfileScreen(
@@ -86,50 +84,21 @@ fun ProfileScreen(
                 )
             }
 
-            Column(
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+            Section(
+                title = "Refund Details"
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().height(40.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    Text(
-                        text = "Refund Details",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
+                    InfoCard(title = "IBAN", value = iban)
+                    InfoCard(title = "PAYPAL", value = paypalAccount)
                 }
-
-                InfoCard(title = "IBAN", value = iban)
-                InfoCard(title = "PAYPAL", value = paypalAccount)
             }
 
-            Column(
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+            Section(
+                title = "Statistics",
+                onViewAllClick = { /* TODO: Navigate stats */ }
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().height(40.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text ="Statistics",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    TextButton(
-                        onClick = { /* TODO: navigate to statistics screen */ },
-                        contentPadding = PaddingValues(0.dp)
-                    ) {
-                        Text(
-                            text = "View all",
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
-
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -140,7 +109,6 @@ fun ProfileScreen(
                         valueFontWeight = FontWeight.Bold,
                         modifier = Modifier.weight(1f)
                     )
-
                     InfoCard(
                         title = "TOTAL TRIPS",
                         value = totTrips,
@@ -150,31 +118,10 @@ fun ProfileScreen(
                 }
             }
 
-            Column(
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+            Section(
+                title = "Your Likes",
+                onViewAllClick = { /* TODO: Navigate all likes */ }
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().height(40.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text ="Your Likes",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    TextButton(
-                        onClick = { /* TODO: navigate to all liked photos */ },
-                        contentPadding = PaddingValues(0.dp)
-                    ) {
-                        Text(
-                            text = "View all",
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -184,9 +131,7 @@ fun ProfileScreen(
                     repeat(6) {
                         ImageCard(
                             imagePainter = painterResource(id = R.drawable.ic_launcher_foreground),
-                            modifier = Modifier
-                                .width(100.dp)
-                                .height(100.dp),
+                            modifier = Modifier.size(100.dp),
                             isLiked = true,
                             showLikeIcon = true,
                             showOverlay = false,

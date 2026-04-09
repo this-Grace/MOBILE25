@@ -1,9 +1,11 @@
 package it.unibo.trace.ui.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
@@ -18,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import it.unibo.trace.R
@@ -36,6 +39,7 @@ data class PhotoMock(
 
 @Composable
 fun PhotoScreen(
+    columnsCount: Int? = null,
     onFloatingClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {}
 ) {
@@ -54,16 +58,6 @@ fun PhotoScreen(
         )
     }
 
-    fun onLikeClick(photoId: Int) {
-        photos = photos.map { photo ->
-            if (photo.id == photoId) {
-                photo.copy(isLiked = !photo.isLiked)
-            } else {
-                photo
-            }
-        }
-    }
-
     Scaffold(
         topBar = {
             Header(title, onIconClick = onSettingsClick)
@@ -80,8 +74,19 @@ fun PhotoScreen(
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
+
+        val configuration = LocalConfiguration.current
+        val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        val columnsStrategy = remember(columnsCount, isLandscape) {
+            if (columnsCount != null && !isLandscape) {
+                StaggeredGridCells.Fixed(columnsCount)
+            } else {
+                StaggeredGridCells.Adaptive(160.dp)
+            }
+        }
+
         LazyVerticalStaggeredGrid(
-            columns = StaggeredGridCells.Fixed(2),
+            columns = columnsStrategy,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 12.dp),
@@ -98,12 +103,18 @@ fun PhotoScreen(
             ) { photo ->
                 ImageCard(
                     imagePainter = painterResource(id = photo.imageRes),
-                    modifier = Modifier.aspectRatio(photo.aspectRatio),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(photo.aspectRatio),
                     authorName = photo.authorName,
                     isLiked = photo.isLiked,
                     showLikeIcon = true,
                     showOverlay = true,
-                    onLikeClick = { onLikeClick(photo.id) },
+                    onLikeClick = {
+                        photos = photos.map {
+                            it.takeIf { it.id == photo.id }?.copy(isLiked = !it.isLiked) ?: it
+                        }
+                    },
                     onClick = { /* TODO: more big photo */ }
                 )
             }

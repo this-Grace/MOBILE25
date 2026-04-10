@@ -6,7 +6,7 @@
 
 ## Team Members
 
-#### Grazia Bochdanovits
+#### Grazia Bochdanovits de Kavna
 - **GitHub**: [this-Grace](https://github.com/this-Grace)
 - **Email**: [grazia.bochdanovits@studio.unibo.it](mailto:grazia.bochdanovits@studio.unibo.it)
 

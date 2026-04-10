@@ -8,10 +8,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,12 +27,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun NavigationBar() {
-    var selectedItem by remember { mutableIntStateOf(0) }
-
+fun NavigationBar(
+    selectedTab: Int = 0,
+    onTabSelected: (Int) -> Unit = {}
+) {
     val items = listOf(
         Triple(Icons.Default.ShoppingCart, "COSTS", 0),
-        Triple(Icons.Default.Favorite, "PHOTO", 1),
+        Triple(Icons.Default.Favorite, "PHOTOS", 1),
         Triple(Icons.Default.Place, "MAP", 2)
     )
 
@@ -48,27 +45,28 @@ fun NavigationBar() {
     ) {
         Surface(
             shape = RoundedCornerShape(24.dp),
-            color = MaterialTheme.colorScheme.surfaceVariant,
+            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.8f),
+            shadowElevation = 4.dp,
             modifier = Modifier.wrapContentSize()
         ) {
             Row(
                 modifier = Modifier
-                    .padding(10.dp),
-                horizontalArrangement = Arrangement.spacedBy(14.dp),
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 items.forEach { (icon, label, index) ->
-                    val isSelected = selectedItem == index
+                    val isSelected = selectedTab == index
 
                     Box(
                         modifier = Modifier
                             .clip(RoundedCornerShape(14.dp))
                             .background(
-                                if (isSelected) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
+                                if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
                                 else Color.Transparent
                             )
-                            .clickable { selectedItem = index }
-                            .padding(20.dp, 10.dp),
+                            .clickable { onTabSelected(index) }
+                            .padding(16.dp, 8.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Column(

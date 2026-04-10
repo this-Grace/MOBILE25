@@ -106,13 +106,11 @@ fun ProfileScreen(
                     InfoCard(
                         title = "TOTAL EXPENSES",
                         value = totMoney,
-                        valueFontWeight = FontWeight.Bold,
                         modifier = Modifier.weight(1f)
                     )
                     InfoCard(
                         title = "TOTAL TRIPS",
                         value = totTrips,
-                        valueFontWeight = FontWeight.Bold,
                         modifier = Modifier.weight(1f)
                     )
                 }

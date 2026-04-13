@@ -18,7 +18,6 @@ import it.unibo.trace.R
 @Composable
 fun Footer(
 ) {
-    val title = stringResource(id = R.string.app_name)
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -32,7 +31,7 @@ fun Footer(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "© 2026 $title",
+                text = "© 2026 ${stringResource(id = R.string.app_name)}",
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
             )

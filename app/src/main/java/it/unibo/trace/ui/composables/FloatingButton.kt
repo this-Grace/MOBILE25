@@ -32,7 +32,7 @@ fun FloatingButton(
                 .size(56.dp)
                 .background(brush = Brush.linearGradient(
                         colors = listOf(
-                            Color(0xFF81ECFF),
+                            MaterialTheme.colorScheme.primaryContainer,
                             MaterialTheme.colorScheme.primary
                         ),
                         start = Offset(0f, 0f),

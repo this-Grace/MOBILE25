@@ -4,6 +4,6 @@ import androidx.compose.ui.graphics.Color
 
 val black = Color(0xFF000000)
 val white = Color(0xFFFFFFFF)
-val lightBlue = Color(0xFF00D4EC)
-
-var textC = Color(0xFF004D57)
+val CyanPrimary = Color(0xFF00D4EC)
+val CyanLight = Color(0xFFE0F7FA)
+var CyanDeep = Color(0xFF004D57)

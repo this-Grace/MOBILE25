@@ -65,7 +65,7 @@ fun InfoCard(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                if (subtitle != null) {
+                if (!subtitle.isNullOrEmpty()) {
                     Text(
                         text = subtitle,
                         style = MaterialTheme.typography.bodySmall,

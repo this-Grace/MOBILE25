@@ -34,10 +34,8 @@ fun ImageCard(
     modifier: Modifier = Modifier,
     title: String? = null,
     subtitle: String? = null,
-    authorName: String? = null,
     isLiked: Boolean = false,
     showLikeIcon: Boolean = true,
-    showOverlay: Boolean = true,
     onClick: () -> Unit = {},
     onLikeClick: () -> Unit = {}
 ) {
@@ -54,7 +52,7 @@ fun ImageCard(
                 modifier = Modifier.fillMaxSize()
             )
 
-            if (showOverlay && (title != null || subtitle != null || authorName != null)) {
+            if (!title.isNullOrEmpty() || !subtitle.isNullOrEmpty()) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -74,9 +72,9 @@ fun ImageCard(
                         .padding(16.dp),
                     verticalArrangement = Arrangement.Bottom
                 ) {
-                    title?.let {
+                    if (!title.isNullOrEmpty()) {
                         Text(
-                            text = it,
+                            text = title,
                             style = MaterialTheme.typography.titleLarge,
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
@@ -85,22 +83,13 @@ fun ImageCard(
                         )
                     }
 
-                    subtitle?.let {
+                    if (!subtitle.isNullOrEmpty()) {
                         Text(
-                            text = it,
+                            text = subtitle,
                             style = MaterialTheme.typography.labelSmall,
                             color = Color.White.copy(alpha = 0.8f),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
-                        )
-                    }
-
-                    authorName?.let {
-                        Text(
-                            text = it.uppercase(),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = Color.White,
-                            fontWeight = FontWeight.Bold
                         )
                     }
                 }

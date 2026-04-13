@@ -132,7 +132,6 @@ fun ProfileScreen(
                             modifier = Modifier.size(100.dp),
                             isLiked = true,
                             showLikeIcon = true,
-                            showOverlay = false,
                             onLikeClick = { /* TODO: remove like and update UI */ },
                             onClick = { /* TODO: photo details */ }
                         )

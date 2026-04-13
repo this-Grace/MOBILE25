@@ -11,7 +11,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AddAPhoto
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -43,7 +43,7 @@ fun PhotoScreen(
     onFloatingClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {}
 ) {
-    val title = " A Weekend in Tokyo"
+    val title = "A Weekend in Tokyo"
 
     var photos by remember {
         mutableStateOf(
@@ -68,8 +68,8 @@ fun PhotoScreen(
         floatingActionButton = {
             FloatingButton(
                 onClick = onFloatingClick,
-                imageVector = Icons.Default.Add,
-                contentDescription = "AddPhoto"
+                imageVector = Icons.Default.AddAPhoto,
+                contentDescription = "AddAPhoto"
             )
         },
         containerColor = MaterialTheme.colorScheme.background
@@ -106,16 +106,15 @@ fun PhotoScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(photo.aspectRatio),
-                    authorName = photo.authorName,
+                    title = photo.authorName,
                     isLiked = photo.isLiked,
                     showLikeIcon = true,
-                    showOverlay = true,
                     onLikeClick = {
                         photos = photos.map {
                             it.takeIf { it.id == photo.id }?.copy(isLiked = !it.isLiked) ?: it
                         }
                     },
-                    onClick = { /* TODO: more big photo */ }
+                    onClick = { /* TODO: navigate to full screen image */ }
                 )
             }
         }

@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.CreditCard
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Surface
@@ -34,7 +35,8 @@ fun NavigationBar(
     val items = listOf(
         Triple(Icons.Default.ShoppingCart, "COSTS", 0),
         Triple(Icons.Default.CameraAlt, "PHOTOS", 1),
-        Triple(Icons.Default.Place, "MAP", 2)
+        Triple(Icons.Default.Place, "MAP", 2),
+        Triple(Icons.Default.CreditCard, "LIST", 3)
     )
 
     Box(

@@ -1,139 +1,70 @@
 package it.unibo.trace.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.rounded.LocalMall
-import androidx.compose.material.icons.rounded.Restaurant
-import androidx.compose.material.icons.rounded.Train
-import androidx.compose.material3.Icon
+import androidx.compose.material.icons.filled.AddAPhoto
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import it.unibo.trace.R
 import it.unibo.trace.ui.composables.FloatingButton
 import it.unibo.trace.ui.composables.Header
-import it.unibo.trace.ui.composables.InfoCard
+import it.unibo.trace.ui.composables.ImageCard
 import it.unibo.trace.ui.composables.NavigationBar
-import it.unibo.trace.ui.composables.Section
-import androidx.compose.foundation.Image
-import androidx.compose.ui.Alignment
 
 @Composable
 fun CostsScreen(
     onFloatingClick: () -> Unit = {},
-    onSettingsClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {}
 ) {
-    var selectedTab by remember { mutableIntStateOf(0) }
-    val groupName = "Weekend in Tokyo"
+    val title = "A Weekend in Tokyo"
 
     Scaffold(
         topBar = {
-            Header(title = groupName, onIconClick = onSettingsClick)
+            Header(title, onIconClick = onSettingsClick)
         },
         bottomBar = {
-            NavigationBar(
-                selectedTab = selectedTab,
-                onTabSelected = { selectedTab = it }
-            )
+            NavigationBar()
         },
         floatingActionButton = {
             FloatingButton(
                 onClick = onFloatingClick,
-                imageVector = Icons.Default.Add,
-                contentDescription = "Add Expense"
+                imageVector = Icons.Default.AddAPhoto,
+                contentDescription = "AddAPhoto"
             )
         },
+        containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(
+                top = innerPadding.calculateTopPadding() + 8.dp,
+                bottom = innerPadding.calculateBottomPadding() + 8.dp,
+                start = 16.dp,
+                end = 16.dp
+            ),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = it.unibo.trace.R.drawable.ic_launcher_foreground),
-                    contentDescription = "Group Image",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
-                Text(
-                    text = groupName,
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+            items(5) { index ->
+                ImageCard(
                     modifier = Modifier
-                        .align(Alignment.BottomStart)
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    title = "Card Random #${index + 1}",
+                    subtitle = "Example of description",
+                    imagePainter = painterResource(id = R.drawable.ic_launcher_foreground),
+                    showLikeIcon = false,
+                    onClick = { /* TODO: navigate in the group */ }
                 )
             }
-
-            Section(title = "Debts Summary") {
-                InfoCard(
-                    title = "Maria owes you",
-                    value = "€120,00",
-                )
-                InfoCard(
-                    title = "You owe Luca",
-                    value = "€15,00",
-                )
-            }
-
-            Section(title = "Today, Oct 14") {
-                InfoCard(
-                    title = "Sushiro Shinjuku",
-                    subtitle = "Group dinner • Paid by you",
-                    value = "€42,00",
-                    icon = {
-                        Icon(Icons.Rounded.Restaurant, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-                    }
-                )
-                InfoCard(
-                    title = "Metro pass",
-                    subtitle = "Transportation • Paid by Maria",
-                    value = "€22,50",
-                    icon = {
-                        Icon(Icons.Rounded.Train, contentDescription = null, tint = MaterialTheme.colorScheme.secondary)
-                    }
-                )
-            }
-
-            Section(title = "Yesterday, Oct 13") {
-                InfoCard(
-                    title = "Pokemon Cards",
-                    subtitle = "Souvenir • Paid by you",
-                    value = "€85,00",
-                    icon = {
-                        Icon(Icons.Rounded.LocalMall, contentDescription = null, tint = MaterialTheme.colorScheme.tertiary)
-                    }
-                )
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }

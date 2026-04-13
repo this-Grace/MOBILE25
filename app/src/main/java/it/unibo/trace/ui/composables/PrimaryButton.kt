@@ -9,8 +9,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -25,19 +23,12 @@ fun PrimaryButton(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .height(50.dp)
-            .graphicsLayer {
-                shadowElevation = 12.dp.toPx()
-                shape = RoundedCornerShape(6.dp)
-                clip = true
-                spotShadowColor = Color(0xFF00F3ED)
-                ambientShadowColor = Color(0xFF00F3ED)
-            },
+            .height(50.dp),
+        shape = RoundedCornerShape(6.dp),
         elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 0.dp,
+            defaultElevation = 6.dp,
             pressedElevation = 2.dp
         ),
-        shape = RoundedCornerShape(6.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary

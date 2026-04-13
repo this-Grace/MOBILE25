@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import it.unibo.trace.R
+import java.util.Calendar
 
 @Composable
 fun Footer(
@@ -31,9 +32,9 @@ fun Footer(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "© 2026 ${stringResource(id = R.string.app_name)}",
+                text = "© ${Calendar.getInstance().get(Calendar.YEAR)} ${stringResource(id = R.string.app_name)}",
                 fontSize = 12.sp,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
     }

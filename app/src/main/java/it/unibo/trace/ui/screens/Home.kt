@@ -26,11 +26,9 @@ fun HomeScreen(
     onFloatingClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {}
 ) {
-    val title = "TRACE"
-
     Scaffold(
         topBar = {
-            Header(title, onIconClick = onSettingsClick)
+            Header("MY GROUPS", onIconClick = onSettingsClick)
         },
         bottomBar = {
             Footer()
@@ -58,7 +56,6 @@ fun HomeScreen(
                     title = "Card Random #${index + 1}",
                     subtitle = "Example of description",
                     imagePainter = painterResource(id = R.drawable.ic_launcher_foreground),
-                    showOverlay = true,
                     showLikeIcon = false,
                     onClick = { /* TODO: navigate in the group */ }
                 )

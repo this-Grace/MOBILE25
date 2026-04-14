@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun InfoCard(
     title: String,
-    value: String,
     modifier: Modifier = Modifier,
+    value: String? = null,
     subtitle: String? = null,
     icon: @Composable (() -> Unit)? = null,
     onClick: () -> Unit = {}
@@ -65,21 +65,23 @@ fun InfoCard(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                if (!subtitle.isNullOrEmpty()) {
+                subtitle?.let {
                     Text(
                         text = subtitle,
-                        style = MaterialTheme.typography.bodySmall,
+                        style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
 
-            Text(
-                text = value,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+            value?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
         }
     }
 }

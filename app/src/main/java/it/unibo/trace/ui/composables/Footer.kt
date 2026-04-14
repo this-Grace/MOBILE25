@@ -12,18 +12,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import it.unibo.trace.R
 import java.util.Calendar
 
 @Composable
-fun Footer(
-) {
+fun Footer() {
     Surface(
+        color = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.onBackground,
         modifier = Modifier
             .fillMaxWidth()
             .navigationBarsPadding(),
-        color = MaterialTheme.colorScheme.background
     ) {
         Box(
             modifier = Modifier
@@ -32,9 +31,10 @@ fun Footer(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "© ${Calendar.getInstance().get(Calendar.YEAR)} ${stringResource(id = R.string.app_name)}",
-                fontSize = 12.sp,
-                color = MaterialTheme.colorScheme.onBackground
+                text = "© ${
+                    Calendar.getInstance().get(Calendar.YEAR)
+                } ${stringResource(id = R.string.app_name)}",
+                style = MaterialTheme.typography.labelSmall
             )
         }
     }

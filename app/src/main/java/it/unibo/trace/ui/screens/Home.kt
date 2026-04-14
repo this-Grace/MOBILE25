@@ -10,14 +10,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import it.unibo.trace.ui.composables.Footer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import it.unibo.trace.R
 import it.unibo.trace.ui.composables.FloatingButton
+import it.unibo.trace.ui.composables.Footer
 import it.unibo.trace.ui.composables.Header
 import it.unibo.trace.ui.composables.ImageCard
 
@@ -28,7 +29,7 @@ fun HomeScreen(
 ) {
     Scaffold(
         topBar = {
-            Header("MY GROUPS", onIconClick = onSettingsClick)
+            Header("MY GROUPS", imageVector = Icons.Default.Person, onIconClick = onSettingsClick)
         },
         bottomBar = {
             Footer()
@@ -37,7 +38,8 @@ fun HomeScreen(
             FloatingButton(
                 onClick = onFloatingClick,
                 imageVector = Icons.Default.Add,
-                contentDescription = "Add")
+                contentDescription = "Add"
+            )
         }
     ) { innerPadding ->
         Column(

@@ -1,4 +1,4 @@
-package it.unibo.trace.ui.screens
+package it.unibo.trace.ui.screens.auth
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -27,14 +27,12 @@ import androidx.compose.ui.unit.dp
 import it.unibo.trace.ui.composables.PrimaryButton
 
 @Composable
-fun RegisterScreen(
-    onRegisterClick: (String, String, String) -> Unit = { _, _, _ -> },
-    onLoginNavigation: () -> Unit = {}
+fun LoginScreen(
+    onLoginClick: (String, String) -> Unit = { _, _ -> },
+    onRegisterNavigation: () -> Unit = {}
 ) {
     var username by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -48,7 +46,7 @@ fun RegisterScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Create Account",
+                text = "Welcome Back",
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
@@ -67,52 +65,29 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
                 label = { Text("Password") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            OutlinedTextField(
-                value = confirmPassword,
-                onValueChange = { confirmPassword = it },
-                label = { Text("Confirm Password") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
             PrimaryButton(
-                text = "REGISTER",
-                onClick = { onRegisterClick(username, email, password) }
+                text = "LOGIN",
+                onClick = { onLoginClick(username, password) }
             )
 
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "Already have an account? Login",
+                text = "Don't have an account? Register",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.secondary,
-                modifier = Modifier.clickable { onLoginNavigation() }
+                modifier = Modifier.clickable { onRegisterNavigation() }
             )
         }
     }

@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -31,9 +32,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import it.unibo.trace.ui.composables.Footer
 import androidx.compose.ui.unit.dp
 import it.unibo.trace.R
+import it.unibo.trace.ui.composables.Footer
 import it.unibo.trace.ui.composables.Header
 import it.unibo.trace.ui.composables.ImageCard
 import it.unibo.trace.ui.composables.InfoCard
@@ -46,7 +47,7 @@ fun ProfileScreen(
     val clipboardManager = LocalClipboardManager.current
     val context = LocalContext.current
 
-    val title = "PROFILE"
+    "PROFILE"
     val username = "Marco_01"
     val iban = "IT 60 X 05424 03200 000000123456"
     val paypalAccount = "@marco_01"
@@ -55,7 +56,12 @@ fun ProfileScreen(
 
     Scaffold(
         topBar = {
-            Header(title, onIconClick = onSettingsClick)
+            Header(
+                "PROFILE",
+                imageVector = Icons.Default.Settings,
+                onBackClick = {},
+                onIconClick = onSettingsClick
+            )
         },
         bottomBar = {
             Footer()
@@ -99,7 +105,11 @@ fun ProfileScreen(
                         title = "IBAN",
                         subtitle = iban,
                         icon = {
-                            Icon(Icons.Default.ContentCopy, contentDescription = "copy", tint = MaterialTheme.colorScheme.primary)
+                            Icon(
+                                Icons.Default.ContentCopy,
+                                contentDescription = "copy",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
                         },
                         onClick = {
                             clipboardManager.setText(AnnotatedString(iban))
@@ -110,7 +120,11 @@ fun ProfileScreen(
                         title = "PAYPAL",
                         subtitle = paypalAccount,
                         icon = {
-                            Icon(Icons.Default.ContentCopy, contentDescription = "copy", tint = MaterialTheme.colorScheme.primary)
+                            Icon(
+                                Icons.Default.ContentCopy,
+                                contentDescription = "copy",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
                         },
                         onClick = {
                             clipboardManager.setText(AnnotatedString(paypalAccount))

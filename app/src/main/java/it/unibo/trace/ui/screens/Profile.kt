@@ -1,7 +1,7 @@
 package it.unibo.trace.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,7 +26,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import it.unibo.trace.ui.composables.Footer
 import androidx.compose.ui.unit.dp
@@ -37,6 +43,9 @@ import it.unibo.trace.ui.composables.Section
 fun ProfileScreen(
     onSettingsClick: () -> Unit = {}
 ) {
+    val clipboardManager = LocalClipboardManager.current
+    val context = LocalContext.current
+
     val title = "PROFILE"
     val username = "Marco_01"
     val iban = "IT 60 X 05424 03200 000000123456"
@@ -84,14 +93,30 @@ fun ProfileScreen(
                 )
             }
 
-            Section(
-                title = "Refund Details"
-            ) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    InfoCard(title = "IBAN", value = iban)
-                    InfoCard(title = "PAYPAL", value = paypalAccount)
+            Section(title = "Refund Details") {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    InfoCard(
+                        title = "IBAN",
+                        subtitle = iban,
+                        icon = {
+                            Icon(Icons.Default.ContentCopy, contentDescription = "copy", tint = MaterialTheme.colorScheme.primary)
+                        },
+                        onClick = {
+                            clipboardManager.setText(AnnotatedString(iban))
+                            Toast.makeText(context, "Copy!", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                    InfoCard(
+                        title = "PAYPAL",
+                        subtitle = paypalAccount,
+                        icon = {
+                            Icon(Icons.Default.ContentCopy, contentDescription = "copy", tint = MaterialTheme.colorScheme.primary)
+                        },
+                        onClick = {
+                            clipboardManager.setText(AnnotatedString(paypalAccount))
+                            Toast.makeText(context, "Copy!", Toast.LENGTH_SHORT).show()
+                        }
+                    )
                 }
             }
 
@@ -105,12 +130,12 @@ fun ProfileScreen(
                 ) {
                     InfoCard(
                         title = "TOTAL EXPENSES",
-                        value = totMoney,
+                        subtitle = totMoney,
                         modifier = Modifier.weight(1f)
                     )
                     InfoCard(
                         title = "TOTAL TRIPS",
-                        value = totTrips,
+                        subtitle = totTrips,
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -121,12 +146,10 @@ fun ProfileScreen(
                 onViewAllClick = { /* TODO: Navigate all likes */ }
             ) {
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .horizontalScroll(rememberScrollState()),
+                    modifier = Modifier,
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    repeat(6) {
+                    repeat(3) {
                         ImageCard(
                             imagePainter = painterResource(id = R.drawable.ic_launcher_foreground),
                             modifier = Modifier.size(100.dp),

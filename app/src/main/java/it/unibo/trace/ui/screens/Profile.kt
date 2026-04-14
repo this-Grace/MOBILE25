@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,9 +27,9 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import it.unibo.trace.ui.composables.Footer
 import androidx.compose.ui.unit.dp
 import it.unibo.trace.R
+import it.unibo.trace.ui.composables.Footer
 import it.unibo.trace.ui.composables.Header
 import it.unibo.trace.ui.composables.ImageCard
 import it.unibo.trace.ui.composables.InfoCard
@@ -37,7 +39,6 @@ import it.unibo.trace.ui.composables.Section
 fun ProfileScreen(
     onSettingsClick: () -> Unit = {}
 ) {
-    val title = "PROFILE"
     val username = "Marco_01"
     val iban = "IT 60 X 05424 03200 000000123456"
     val paypalAccount = "@marco_01"
@@ -46,7 +47,12 @@ fun ProfileScreen(
 
     Scaffold(
         topBar = {
-            Header(title, onIconClick = onSettingsClick)
+            Header(
+                "PROFILE",
+                imageVector = Icons.Default.Settings,
+                onBackClick = {},
+                onIconClick = onSettingsClick
+            )
         },
         bottomBar = {
             Footer()

@@ -47,7 +47,6 @@ fun ProfileScreen(
     val clipboardManager = LocalClipboardManager.current
     val context = LocalContext.current
 
-    "PROFILE"
     val username = "Marco_01"
     val iban = "IT 60 X 05424 03200 000000123456"
     val paypalAccount = "@marco_01"

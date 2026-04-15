@@ -34,6 +34,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import it.unibo.trace.R
+import it.unibo.trace.data.profileMock
 import it.unibo.trace.ui.composables.Footer
 import it.unibo.trace.ui.composables.Header
 import it.unibo.trace.ui.composables.ImageCard
@@ -46,12 +47,6 @@ fun ProfileScreen(
 ) {
     val clipboardManager = LocalClipboardManager.current
     val context = LocalContext.current
-
-    val username = "Marco_01"
-    val iban = "IT 60 X 05424 03200 000000123456"
-    val paypalAccount = "@marco_01"
-    val totMoney = "€4.280"
-    val totTrips = "12"
 
     Scaffold(
         topBar = {
@@ -91,7 +86,7 @@ fun ProfileScreen(
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
-                    text = "@$username",
+                    text = "@${profileMock.username}",
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary
@@ -102,7 +97,7 @@ fun ProfileScreen(
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     InfoCard(
                         title = "IBAN",
-                        subtitle = iban,
+                        subtitle = profileMock.iban,
                         icon = {
                             Icon(
                                 Icons.Default.ContentCopy,
@@ -111,13 +106,13 @@ fun ProfileScreen(
                             )
                         },
                         onClick = {
-                            clipboardManager.setText(AnnotatedString(iban))
+                            clipboardManager.setText(AnnotatedString(profileMock.iban))
                             Toast.makeText(context, "Copy!", Toast.LENGTH_SHORT).show()
                         }
                     )
                     InfoCard(
                         title = "PAYPAL",
-                        subtitle = paypalAccount,
+                        subtitle = profileMock.paypalAccount,
                         icon = {
                             Icon(
                                 Icons.Default.ContentCopy,
@@ -126,7 +121,7 @@ fun ProfileScreen(
                             )
                         },
                         onClick = {
-                            clipboardManager.setText(AnnotatedString(paypalAccount))
+                            clipboardManager.setText(AnnotatedString(profileMock.paypalAccount))
                             Toast.makeText(context, "Copy!", Toast.LENGTH_SHORT).show()
                         }
                     )
@@ -143,12 +138,12 @@ fun ProfileScreen(
                 ) {
                     InfoCard(
                         title = "TOTAL EXPENSES",
-                        subtitle = totMoney,
+                        subtitle = profileMock.totalExpenses,
                         modifier = Modifier.weight(1f)
                     )
                     InfoCard(
                         title = "TOTAL TRIPS",
-                        subtitle = totTrips,
+                        subtitle = profileMock.totalTrips,
                         modifier = Modifier.weight(1f)
                     )
                 }

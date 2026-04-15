@@ -23,16 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import it.unibo.trace.data.historyMockup
 
-data class ExpenseMock(
-    val id: String,
-    val title: String,
-    val category: String,
-    val paidBy: String,
-    val amount: Double,
-    val date: String,
-    val iconType: String
-)
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun History(innerPadding: PaddingValues = PaddingValues()) {

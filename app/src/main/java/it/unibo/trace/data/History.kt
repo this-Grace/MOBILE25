@@ -1,6 +1,14 @@
 package it.unibo.trace.data
 
-import it.unibo.trace.ui.screens.group.composables.ExpenseMock
+data class ExpenseMock(
+    val id: String,
+    val title: String,
+    val category: String,
+    val paidBy: String,
+    val amount: Double,
+    val date: String,
+    val iconType: String
+)
 
 val historyMockup = listOf(
     ExpenseMock(

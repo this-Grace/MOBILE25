@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
@@ -23,13 +24,15 @@ fun FloatingButton(
 ) {
     FloatingActionButton(
         onClick = onClick,
-        containerColor = MaterialTheme.colorScheme.surface,
+        shape = CircleShape,
+        containerColor = Color.Transparent,
         contentColor = MaterialTheme.colorScheme.onPrimary
     ) {
         Box(
             modifier = Modifier
                 .size(56.dp)
-                .background(brush = Brush.linearGradient(
+                .background(
+                    brush = Brush.linearGradient(
                         colors = listOf(
                             MaterialTheme.colorScheme.primary,
                             MaterialTheme.colorScheme.primaryContainer

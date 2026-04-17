@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import it.unibo.trace.data.BalanceStatus
-import it.unibo.trace.ui.theme.semanticColors
 import java.util.Locale
 import kotlin.math.abs
 
@@ -17,16 +16,16 @@ fun BalanceRow(
     modifier: Modifier = Modifier,
     status: BalanceStatus? = null
 ) {
-    val semantic = MaterialTheme.colorScheme.semanticColors
+    val colorScheme = MaterialTheme.colorScheme
 
     val (label, color) = when (status) {
-        BalanceStatus.RECEIVE -> "To receive" to semantic.positive
-        BalanceStatus.PAY -> "To pay" to semantic.negative
-        BalanceStatus.EVEN -> "Settled" to semantic.neutral
+        BalanceStatus.RECEIVE -> "To receive" to colorScheme.primary
+        BalanceStatus.PAY -> "To pay" to colorScheme.error
+        BalanceStatus.EVEN -> "Settled" to colorScheme.outline
         null -> when {
-            amount > 0 -> "Positive" to semantic.positive
-            amount < 0 -> "Negative" to semantic.negative
-            else -> "Settled" to semantic.neutral
+            amount > 0 -> "Positive" to colorScheme.primary
+            amount < 0 -> "Negative" to colorScheme.error
+            else -> "Settled" to colorScheme.outline
         }
     }
 

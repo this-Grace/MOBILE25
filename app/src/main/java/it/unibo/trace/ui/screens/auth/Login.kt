@@ -46,6 +46,12 @@ fun LoginScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
+                text = "TRACE",
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
                 text = "Welcome Back",
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,

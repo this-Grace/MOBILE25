@@ -28,7 +28,8 @@ fun Header(
                 text = title,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
-                letterSpacing = 2.sp
+                letterSpacing = 2.sp,
+                color = MaterialTheme.colorScheme.primary
             )
         },
         navigationIcon = {

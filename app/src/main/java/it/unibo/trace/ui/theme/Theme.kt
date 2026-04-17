@@ -15,7 +15,9 @@ private val DarkColorScheme = darkColorScheme(
     onBackground = white,
     primary = CyanPrimary,
     primaryContainer = CyanLight,
-    onPrimary = CyanDeep
+    onPrimary = CyanDeep,
+    error = RedNegative,
+    outline = GrayNeutral
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -23,7 +25,9 @@ private val LightColorScheme = lightColorScheme(
     onBackground = black,
     primary = CyanPrimary,
     primaryContainer = CyanLight,
-    onPrimary = CyanDeep
+    onPrimary = CyanDeep,
+    error = RedNegative,
+    outline = GrayNeutral
 )
 
 @Composable

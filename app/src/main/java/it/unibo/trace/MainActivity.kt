@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import it.unibo.trace.ui.screens.ProfileScreen
+import it.unibo.trace.data.defaultParticipants
+import it.unibo.trace.ui.screens.group.ParticipantsScreen
 import it.unibo.trace.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,10 +16,10 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 // LoginScreen {  }
                 // RegisterScreen {  }
-                // HomeScreen { }
-                ProfileScreen { } // TODO: fix section, parameter/mockup etc
-                // ExpenseScreen()
-                // GroupScreen { }
+                // HomeScreen(groupsMock)
+                // ProfileScreen { }
+                // CreateGroupScreen()
+                ParticipantsScreen("Group", defaultParticipants)
             }
         }
     }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
@@ -35,10 +37,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import it.unibo.trace.R
 import it.unibo.trace.data.profileMock
+import it.unibo.trace.ui.composables.CardRow
 import it.unibo.trace.ui.composables.Footer
 import it.unibo.trace.ui.composables.Header
 import it.unibo.trace.ui.composables.ImageCard
-import it.unibo.trace.ui.composables.InfoCard
 import it.unibo.trace.ui.composables.Section
 
 @Composable
@@ -59,7 +61,8 @@ fun ProfileScreen(
         },
         bottomBar = {
             Footer()
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -93,37 +96,63 @@ fun ProfileScreen(
                 )
             }
 
-            Section(title = "Refund Details") {
+            Section(title = "Refund Details", onViewAllClick = null) {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    InfoCard(
+                    CardRow(
                         title = "IBAN",
                         subtitle = profileMock.iban,
-                        icon = {
-                            Icon(
-                                Icons.Default.ContentCopy,
-                                contentDescription = "copy",
-                                tint = MaterialTheme.colorScheme.primary
-                            )
+                        leadingContent = {
+                            Box(
+                                modifier = Modifier
+                                    .size(44.dp)
+                                    .background(
+                                        color = MaterialTheme.colorScheme.surface,
+                                        shape = RoundedCornerShape(8.dp)
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    Icons.Default.ContentCopy,
+                                    contentDescription = "copy",
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
                         },
                         onClick = {
                             clipboardManager.setText(AnnotatedString(profileMock.iban))
                             Toast.makeText(context, "Copy!", Toast.LENGTH_SHORT).show()
-                        }
+                        },
+                        titleFontWeight = FontWeight.Bold,
+                        subtitleStyle = MaterialTheme.typography.bodyMedium,
+                        contentPadding = PaddingValues(16.dp)
                     )
-                    InfoCard(
+                    CardRow(
                         title = "PAYPAL",
                         subtitle = profileMock.paypalAccount,
-                        icon = {
-                            Icon(
-                                Icons.Default.ContentCopy,
-                                contentDescription = "copy",
-                                tint = MaterialTheme.colorScheme.primary
-                            )
+                        leadingContent = {
+                            Box(
+                                modifier = Modifier
+                                    .size(44.dp)
+                                    .background(
+                                        color = MaterialTheme.colorScheme.surface,
+                                        shape = RoundedCornerShape(8.dp)
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    Icons.Default.ContentCopy,
+                                    contentDescription = "copy",
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
                         },
                         onClick = {
                             clipboardManager.setText(AnnotatedString(profileMock.paypalAccount))
                             Toast.makeText(context, "Copy!", Toast.LENGTH_SHORT).show()
-                        }
+                        },
+                        titleFontWeight = FontWeight.Bold,
+                        subtitleStyle = MaterialTheme.typography.bodyMedium,
+                        contentPadding = PaddingValues(16.dp)
                     )
                 }
             }
@@ -136,15 +165,21 @@ fun ProfileScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    InfoCard(
+                    CardRow(
                         title = "TOTAL EXPENSES",
                         subtitle = profileMock.totalExpenses,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        titleFontWeight = FontWeight.Bold,
+                        subtitleStyle = MaterialTheme.typography.bodyMedium,
+                        contentPadding = PaddingValues(16.dp)
                     )
-                    InfoCard(
+                    CardRow(
                         title = "TOTAL TRIPS",
                         subtitle = profileMock.totalTrips,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        titleFontWeight = FontWeight.Bold,
+                        subtitleStyle = MaterialTheme.typography.bodyMedium,
+                        contentPadding = PaddingValues(16.dp)
                     )
                 }
             }

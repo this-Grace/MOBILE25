@@ -22,6 +22,8 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.font.FontWeight
+import it.unibo.trace.data.ExpenseMock
+import it.unibo.trace.data.PhotoItem
 import it.unibo.trace.ui.composables.FloatingButton
 import it.unibo.trace.ui.composables.NavigationBar
 import it.unibo.trace.ui.composables.NavigationTabData
@@ -34,7 +36,13 @@ import it.unibo.trace.ui.screens.group.composables.Photo
 @Composable
 fun GroupScreen(
     title: String = "GROUP NAME",
-    onFloatingClick: () -> Unit = {}
+    photos: List<PhotoItem>,
+    expenses: List<ExpenseMock>,
+    onEditExpense: (ExpenseMock) -> Unit,
+    onDeleteExpense: (ExpenseMock) -> Unit,
+    onTogglePhotoLike: (String) -> Unit,
+    onShowParticipants: () -> Unit,
+    onBack: () -> Unit
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
 
@@ -43,10 +51,19 @@ fun GroupScreen(
             Debit(innerPadding = padding)
         },
         NavigationTabData(Icons.Default.ShoppingCart, "HISTORY", 1) { padding ->
-            History(innerPadding = padding)
+            History(
+                innerPadding = padding,
+                expenses = expenses,
+                onEditExpense = onEditExpense,
+                onDeleteExpense = onDeleteExpense
+            )
         },
         NavigationTabData(Icons.Default.CameraAlt, "PHOTOS", 2) { padding ->
-            Photo(innerPadding = padding)
+            Photo(
+                innerPadding = padding,
+                photos = photos,
+                onToggleLike = onTogglePhotoLike
+            )
         },
         NavigationTabData(Icons.Default.Place, "MAPS", 3) { padding ->
             Maps(innerPadding = padding)
@@ -64,7 +81,7 @@ fun GroupScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { /* TODO: Go Back */ }) {
+                    IconButton(onClick = onBack) {
                         Icon(
                             Icons.Default.ArrowBackIosNew,
                             contentDescription = "Back",
@@ -73,7 +90,7 @@ fun GroupScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /* TODO */ }) {
+                    IconButton(onClick = onShowParticipants) {
                         Icon(
                             Icons.Default.Groups,
                             contentDescription = "GroupData",
@@ -95,7 +112,7 @@ fun GroupScreen(
         },
         floatingActionButton = {
             FloatingButton(
-                onClick = onFloatingClick,
+                onClick = { },
                 imageVector = Icons.Default.Add,
                 contentDescription = "Add Photo"
             )

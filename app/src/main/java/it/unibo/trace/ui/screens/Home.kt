@@ -11,12 +11,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import it.unibo.trace.R
+import it.unibo.trace.data.GroupMock
 import it.unibo.trace.ui.composables.FloatingButton
 import it.unibo.trace.ui.composables.Footer
 import it.unibo.trace.ui.composables.Header
@@ -24,7 +26,9 @@ import it.unibo.trace.ui.composables.ImageCard
 
 @Composable
 fun HomeScreen(
-    onFloatingClick: () -> Unit = {},
+    groups: List<GroupMock>,
+    onGroupClick: (String) -> Unit = {},
+    onCreateGroup: () -> Unit = {},
     onSettingsClick: () -> Unit = {}
 ) {
     Scaffold(
@@ -36,11 +40,12 @@ fun HomeScreen(
         },
         floatingActionButton = {
             FloatingButton(
-                onClick = onFloatingClick,
+                onClick = onCreateGroup,
                 imageVector = Icons.Default.Add,
                 contentDescription = "Add"
             )
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -50,16 +55,18 @@ fun HomeScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            repeat(5) { index ->
+            groups.forEach { group ->
+                val painter = group.imageBitmap?.let { BitmapPainter(it) }
+                    ?: painterResource(id = group.imageRes)
                 ImageCard(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp),
-                    title = "Card Random #${index + 1}",
-                    subtitle = "Example of description",
-                    imagePainter = painterResource(id = R.drawable.ic_launcher_foreground),
+                    title = group.title,
+                    subtitle = "Tap to open",
+                    imagePainter = painter,
                     showLikeIcon = false,
-                    onClick = { /* TODO: navigate in the group */ }
+                    onClick = { onGroupClick(group.id) }
                 )
             }
         }

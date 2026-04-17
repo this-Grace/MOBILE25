@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Section(
     title: String,
-    onViewAllClick: () -> Unit = {},
+    onViewAllClick: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
     Column(
@@ -37,15 +37,17 @@ fun Section(
                 fontWeight = FontWeight.Bold
             )
 
-            TextButton(
-                onClick = onViewAllClick,
-                contentPadding = PaddingValues(0.dp)
-            ) {
-                Text(
-                    text = "View all",
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.primary
-                )
+            onViewAllClick?.let { action ->
+                TextButton(
+                    onClick = action,
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Text(
+                        text = "View all",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         }
         content()

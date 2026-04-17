@@ -45,10 +45,13 @@ enum class DragAnchors {
 @Composable
 fun SwipeableCard(
     onDelete: () -> Unit,
-    onEdit: () -> Unit
+    onEdit: (() -> Unit)? = null,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
 ) {
     val shape = MaterialTheme.shapes.large
-    val actionWidth = 160f
+    val actionButtons = if (onEdit != null) 2 else 1
+    val actionWidth = 80f * actionButtons
     val density = LocalDensity.current
     val actionWidthPx = with(density) { actionWidth.dp.toPx() }
 
@@ -86,14 +89,16 @@ fun SwipeableCard(
             horizontalArrangement = Arrangement.End
         ) {
 
-            IconButton(
-                onClick = onEdit,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(80.dp)
-                    .background(MaterialTheme.colorScheme.primary)
-            ) {
-                Icon(Icons.Default.Edit, contentDescription = "Edit")
+            onEdit?.let { editAction ->
+                IconButton(
+                    onClick = editAction,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(80.dp)
+                        .background(MaterialTheme.colorScheme.primary)
+                ) {
+                    Icon(Icons.Default.Edit, contentDescription = "Edit")
+                }
             }
 
             IconButton(
@@ -108,7 +113,7 @@ fun SwipeableCard(
         }
 
         Card(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .offset {
                     IntOffset(
@@ -121,10 +126,7 @@ fun SwipeableCard(
                     orientation = Orientation.Horizontal
                 )
         ) {
-            Text(
-                "Something...",
-                modifier = Modifier.padding(16.dp)
-            )
+            content()
         }
     }
 }

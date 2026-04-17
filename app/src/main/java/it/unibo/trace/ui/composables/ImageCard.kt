@@ -111,7 +111,7 @@ fun ImageCard(
                     Icon(
                         imageVector = if (isLiked) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                         contentDescription = "Like",
-                        tint = if (isLiked) Color.Red else Color.White,
+                        tint = if (isLiked) MaterialTheme.colorScheme.error else Color.White,
                         modifier = Modifier.size(24.dp)
                     )
                 }

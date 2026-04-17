@@ -7,7 +7,9 @@ data class ExpenseMock(
     val paidBy: String,
     val amount: Double,
     val date: String,
-    val iconType: String
+    val iconType: String,
+    val lat: Double,
+    val lon: Double
 )
 
 val historyMockup = listOf(
@@ -18,7 +20,9 @@ val historyMockup = listOf(
         paidBy = "you",
         amount = 42.00,
         date = "Oggi, 14 Ottobre",
-        iconType = "restaurant"
+        iconType = "restaurant",
+        lat = 35.6905,
+        lon = 139.7049
     ),
     ExpenseMock(
         id = "2",
@@ -27,7 +31,9 @@ val historyMockup = listOf(
         paidBy = "Maria",
         amount = 22.50,
         date = "Oggi, 14 Ottobre",
-        iconType = "subway"
+        iconType = "subway",
+        lat = 35.6812,
+        lon = 139.7671
     ),
     ExpenseMock(
         id = "3",
@@ -36,7 +42,9 @@ val historyMockup = listOf(
         paidBy = "you",
         amount = 85.00,
         date = "Ieri, 13 Ottobre",
-        iconType = "shopping"
+        iconType = "shopping",
+        lat = 35.6987,
+        lon = 139.7712
     ),
     ExpenseMock(
         id = "4",
@@ -45,7 +53,9 @@ val historyMockup = listOf(
         paidBy = "you",
         amount = 85.00,
         date = "Ieri, 13 Ottobre",
-        iconType = "shopping"
+        iconType = "shopping",
+        lat = 35.7131,
+        lon = 139.7741
     ),
     ExpenseMock(
         id = "5",
@@ -54,7 +64,9 @@ val historyMockup = listOf(
         paidBy = "you",
         amount = 85.00,
         date = "Ieri, 13 Ottobre",
-        iconType = "shopping"
+        iconType = "shopping",
+        lat = 35.6605,
+        lon = 139.6975
     ),
     ExpenseMock(
         id = "6",
@@ -63,7 +75,9 @@ val historyMockup = listOf(
         paidBy = "you",
         amount = 85.00,
         date = "Ieri, 13 Ottobre",
-        iconType = "shopping"
+        iconType = "shopping",
+        lat = 35.6264,
+        lon = 139.7758
     ),
     ExpenseMock(
         id = "7",
@@ -72,7 +86,9 @@ val historyMockup = listOf(
         paidBy = "you",
         amount = 85.00,
         date = "Ieri, 13 Ottobre",
-        iconType = "shopping"
+        iconType = "shopping",
+        lat = 34.6649,
+        lon = 135.5013
     ),
     ExpenseMock(
         id = "9",
@@ -81,7 +97,9 @@ val historyMockup = listOf(
         paidBy = "you",
         amount = 85.00,
         date = "Ieri, 13 Ottobre",
-        iconType = "shopping"
+        iconType = "shopping",
+        lat = 34.9858,
+        lon = 135.7588
     ),
     ExpenseMock(
         id = "10",
@@ -90,6 +108,8 @@ val historyMockup = listOf(
         paidBy = "you",
         amount = 85.00,
         date = "Ieri, 13 Ottobre",
-        iconType = "shopping"
+        iconType = "shopping",
+        lat = 35.4437,
+        lon = 139.6380
     )
 )

@@ -25,8 +25,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 val supabase = createSupabaseClient(
-    supabaseUrl = "https://fxtfjfyewiqzukhdtavq.supabase.co",
-    supabaseKey = "sb_publishable_Jyj-80uEivqMWjmR-HkmAA_gMc-WqVQ"
+    supabaseUrl = BuildConfig.SUPABASE_URL,
+    supabaseKey = BuildConfig.SUPABASE_KEY
 ) {
     install(Postgrest)
 }
